@@ -3,8 +3,6 @@ nginx-proxy:
   ports:
     - "80:80"
     - "443:443"
-  external_links:
-    - dwcollectionsui_ui_1
-    - dwsystem_ws_1:ws
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock:ro
+    - ./certs:/etc/nginx/certs:ro
