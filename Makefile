@@ -8,4 +8,3 @@ clean:
 
 stop: 
 	docker-compose stop
-
