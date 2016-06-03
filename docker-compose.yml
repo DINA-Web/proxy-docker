@@ -4,5 +4,22 @@ nginx-proxy:
     - "80:80"
     - "443:443"
   volumes:
-    - /var/run/docker.sock:/tmp/docker.sock:ro
-    - ./certs:/etc/nginx/certs
+    - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    - "./certs:/etc/nginx/certs:ro"
+    - "/etc/nginx/vhost.d"
+    - "/usr/share/nginx/html"
+
+letsencrypt-nginx-proxy-companion:
+  image: jrcs/letsencrypt-nginx-proxy-companion
+  container_name: letsencrypt-nginx-proxy-companion
+  volumes_from:
+    - nginx-proxy
+  volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    - "./certs:/etc/nginx/certs:rw"
+
+
+# Need to set environment variables on new virtualhosts:
+#    - LETSENCRYPT_TEST=true/false
+#    - LETSENCRYPT_HOST=beta-sso.dina-web.net
+#    - LETSENCRYPT_EMAIL=email@example.com
