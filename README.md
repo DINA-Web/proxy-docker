@@ -1,6 +1,6 @@
 # dw-proxy
 
-A reverse proxy based on nginx, capable of automatically fetching, installing and renewing SSL certificates using its `letsencrypt` companion at no cost. So using it saves a lot of manual maintenance steps.
+A reverse proxy based on `nginx`, capable of automatically fetching, installing and renewing `letsencrypt`SSL certificates at no cost. So using it saves a lot of manual maintenance steps.
 
 # Usage
 
@@ -12,15 +12,13 @@ The other services then only need to add three environment variables which will 
 
 		environment:
 		  - VIRTUAL_HOST=beta-sso.dina-web.net
-		  - LETSENCRYPT_HOST=beta-sso.dina-web.net
 		  - LETSENCRYPT_EMAIL=dina@mail.dina-web.net
-
 
 # Good to know
 
-The proxy is a singleton (it binds on and accepts traffic on port 80 and 443 only, re-routing it) so it shouldn't run in multiple instances. Therefore it can have a "global" server-wide container names, here we use "proxy" for nginx and "letsencrypt" for the SSL certificate companion. 
+The proxy is a singleton (it binds on and accepts traffic on port 80 and 443 only, re-routing it) so it shouldn't run in multiple instances. Therefore it can have a "global" server-wide container name, such as "proxy". 
 
-The `docker-compose.yml` file also uses "restart: always" to work around some errors that otherwise will appear due to asynchronous service starts where the companion components needs a file not yet available from the nginx component.
+The `docker-compose.yml` file also uses "restart: always" to work around some errors may otherwise will appear due to asynchronous service starts where the companion components needs a file not yet available from the nginx component.
 
 # CLI commands for deploying
 
@@ -34,7 +32,7 @@ Then get the code with `git` and run the component with `make`:
 
 # References
 
-- https://hub.docker.com/r/jrcs/letsencrypt-nginx-proxy-companion/
+- https://hub.docker.com/r/eforce21/letsencrypt-nginx-proxy/~/dockerfile/
 - https://www.nginx.com/resources/admin-guide/reverse-proxy/
 - https://hub.docker.com/r/jwilder/nginx-proxy/
 
