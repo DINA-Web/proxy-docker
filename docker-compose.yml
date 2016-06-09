@@ -1,7 +1,9 @@
 fs:
   image: tianon/true
   volumes:
+    - ./conf:/etc/nginx/conf.d
     - ./certs:/etc/nginx/certs
+    - ./certs-archive:/etc/letsencrypt/archive
 
 proxy:
   image: eforce21/letsencrypt-nginx-proxy
@@ -14,6 +16,6 @@ proxy:
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
 # Remember to set environment variables on new virtualhosts:
-# for example:
+# (the first one is required, the other one is recommended)
 #    - VIRTUAL_HOST=beta-sso.dina-web.net
 #    - LETSENCRYPT_EMAIL=dina@mail.dina-web.net
