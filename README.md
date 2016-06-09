@@ -14,6 +14,10 @@ The other services then only need to add three environment variables which will 
 		  - VIRTUAL_HOST=beta-sso.dina-web.net
 		  - LETSENCRYPT_EMAIL=dina@mail.dina-web.net
 
+If you have already certs (wildcard certs for example), you put those in the ./certs directory so those are used instead of letsencrypt-generated certs.
+
+If you need special headers across services, for example for "cors" purposes, add them in `./conf/dina.conf`.
+
 # Good to know
 
 The proxy is a singleton (it binds on and accepts traffic on port 80 and 443 only, re-routing it) so it shouldn't run in multiple instances. Therefore it can have a "global" server-wide container name, such as "proxy". 
