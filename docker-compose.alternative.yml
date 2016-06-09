@@ -1,0 +1,34 @@
+fs:
+  image: tianon/true
+  volumes:
+    - ./certs:/etc/nginx/certs
+
+proxy:
+  image: jwilder/nginx-proxy
+  container_name: proxy
+  restart: always
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes_from:
+    - fs
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+    - ./conf.d:/etc/nginx/conf.d
+    - ./vhost.d:/etc/nginx/vhost.d
+    - ./html:/usr/share/nginx/html
+
+letsencrypt:
+  image: jrcs/letsencrypt-nginx-proxy-companion
+  container_name: letsencrypt
+  restart: always
+  volumes_from:
+    - proxy
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+
+# Remember to set environment variables on new virtualhosts:
+# for example:
+#    - VIRTUAL_HOST=beta-sso.dina-web.net
+#    - LETSENCRYPT_HOST=beta-sso.dina-web.net
+#    - LETSENCRYPT_EMAIL=dina@mail.dina-web.net

@@ -1,4 +1,7 @@
 *~
-./certs/*.crt
-./certs/*.key
+certs/
+.DS_STORE
+*.pem
+*.key
+*.crt
 

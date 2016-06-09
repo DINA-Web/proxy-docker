@@ -1,10 +1,13 @@
 all: up
 
-up: 
+up:
 	docker-compose up -d
 
-clean: 
-	stop 
+clean: stop rm
 
-stop: 
+stop:
 	docker-compose stop
+
+rm:
+	docker-compose rm -vf
+
