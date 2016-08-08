@@ -1,4 +1,4 @@
-*~
-./certs/*.crt
-./certs/*.key
-
+certs/shared.crt
+certs/shared.key
+*.crt
+*.key
