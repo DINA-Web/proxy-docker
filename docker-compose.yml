@@ -1,8 +1,12 @@
-nginx-proxy:
+proxy:
   image: jwilder/nginx-proxy
+  environment:
+    - NGINX_MAX_BODY_SZ=100m
   ports:
-    - "80:80"
-    - "443:443"
+    - 80:80
+    - 443:443
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock:ro
     - ./certs:/etc/nginx/certs
+    - ./site.template:/etc/nginx/conf.d/site.template
+  command: /bin/bash -c "envsubst < /etc/nginx/conf.d/site.template > /etc/nginx/conf.d/dina.conf && forego start -r"
