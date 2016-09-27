@@ -1,6 +1,12 @@
 ME=$(USER)
 all: up
 
+build:
+	docker build -t dina/proxy:v0 .
+
+release:
+	docker push -t dina/proxy:v0
+
 clean: stop rm
 
 up:

@@ -1,5 +1,5 @@
 proxy:
-  image: jwilder/nginx-proxy
+  image: dina/proxy:v0
   environment:
     - NGINX_MAX_BODY_SZ=100m
   ports:
