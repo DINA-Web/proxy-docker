@@ -1,5 +1,5 @@
 ME=$(USER)
-all: up
+all: build up
 
 build:
 	docker build -t dina/proxy:v0 .
