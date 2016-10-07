@@ -6,3 +6,4 @@ nginx-proxy:
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock:ro
     - ./certs:/etc/nginx/certs
+    - /etc/localtime:/etc/localtime
