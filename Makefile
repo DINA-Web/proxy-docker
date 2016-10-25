@@ -1,11 +1,17 @@
+NAME = dina/proxy
 ME=$(USER)
+
 all: build up
 
 build:
-	docker build -t dina/proxy:v0 .
+	docker build --tag $(NAME) .
+
+push:
+	#docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+	docker push $(NAME)
 
 release:
-	docker push -t dina/proxy:v0
+	build push
 
 clean: stop rm
 
