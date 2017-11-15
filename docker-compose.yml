@@ -1,13 +1,18 @@
-proxy:
-  image: dina/proxy:v0
-  environment:
-    - NGINX_MAX_BODY_SZ=100m
-  ports:
-    - 80:80
-    - 443:443
-  volumes:
-    - /var/run/docker.sock:/tmp/docker.sock:ro
-    - ./certs:/etc/nginx/certs
-    - ./site.template:/etc/nginx/conf.d/site.template
-    - /etc/localtime:/etc/localtime
-  command: /bin/bash -c "envsubst < /etc/nginx/conf.d/site.template > /etc/nginx/conf.d/dina.conf && forego start -r"
+version: '3'
+
+services:
+
+  proxy:
+    image: dina/proxy:v0
+    container_name: dina-proxy
+    environment:
+      - NGINX_MAX_BODY_SZ=100m
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
+      - ./site.template:/etc/nginx/conf.d/site.template
+      - /etc/localtime:/etc/localtime
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/site.template > /etc/nginx/conf.d/dina.conf && forego start -r"
