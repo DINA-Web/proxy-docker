@@ -24,3 +24,6 @@ stop:
 
 rm:
 	docker-compose rm -vf
+
+logs:
+	@docker-compose logs -f --tail=40
