@@ -1,4 +1,4 @@
-certs/shared.crt
-certs/shared.key
 *.crt
 *.key
+*tar
+*tar.gz
